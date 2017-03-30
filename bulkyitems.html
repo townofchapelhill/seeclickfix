@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./assets/css/tablecss.css">
+  <title>scf and Actuals: Technology Solutions</title>
+</head>
+<body>
+  <div class="table-title">
+  <h3>Solid Waste: Bulky Item Collection</h3>
+  <div class="counters"></div>
+    <!-- Basic table to display our data from JSON file. -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Opened</th>
+          <th>Description</th>
+          <th>Assignee</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+<script>
+    $.getJSON("./data/bulkyitems.json", function(scf) {
+      //initialize counters for open and acknowledged records
+      var openCounter = 0;
+      var ackCounter = 0;
+      //loop through data and add rows based on "open" 
+      //or "acknowledged" status to the table
+      for (var i = 0; i < scf.issues.length; i++) {
+        //variable b accesses scf issues data at index i
+        var b = scf.issues[i];
+        //initialize new "row" array after every loop
+        var items = [];
+        if (b.status == "Open" || b.status == "Acknowledged") {
+          items.push("<tr>");
+          //hyperlink placed in each id
+          items.push("<td>" + "<a href='https://crm.seeclickfix.com/#/organizations/1102/issues/" + b.id + "'>" + b.id + "</a>" + "</td>");
+          items.push("<td>" + b.status + "</td>");
+          items.push("<td>" + b.created_at + "</td>");
+          items.push("<td>" + b.description + "</td>");
+          items.push("<td>" + b.assignee.name + "</td>");
+          items.push("</tr>");
+          items.join("");
+          $('.table').append(items);
+        };
+        //increment counters
+        if (b.status == "Open") {
+          openCounter += 1;
+        }
+        if (b.status == "Acknowledged") {
+          ackCounter += 1;
+        }
+      };
+      //append counter values to top of page ("counters" class)
+      $('.counters').append("<p> Opened records: " + openCounter + "</p>");
+      $('.counters').append("<p> Acknowledged records: " + ackCounter + "</p>");
+    });
+</script>
+  
+</body>
+</html>
