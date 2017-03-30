@@ -22,6 +22,7 @@
           <th>Description</th>
           <th>Assignee</th>
           <th># of Items</th>
+          <th>Item Description</th>
         </tr>
       </thead>
     </table>
@@ -48,6 +49,7 @@
           items.push("<td>" + b.description + "</td>");
           items.push("<td>" + b.assignee.name + "</td>");
           items.push("<td>" + b.questions[0].answer + "</td>");
+          items.push("<td>" + b.questions[1].answer + "</td>");
           items.push("</tr>");
           items.join("");
           $('.table').append(items);
