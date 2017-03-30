@@ -21,6 +21,7 @@
           <th>Opened</th>
           <th>Description</th>
           <th>Assignee</th>
+          <th># of Items</th>
         </tr>
       </thead>
     </table>
@@ -46,6 +47,7 @@
           items.push("<td>" + b.created_at + "</td>");
           items.push("<td>" + b.description + "</td>");
           items.push("<td>" + b.assignee.name + "</td>");
+          items.push("<td>" + b.questions[0].answer + "</td>");
           items.push("</tr>");
           items.join("");
           $('.table').append(items);
