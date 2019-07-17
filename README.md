@@ -1,5 +1,7 @@
 # seeclickfix
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/26b0d186d3c1424fa1a240c083c3f5df)](https://app.codacy.com/app/TownofChapelHill/seeclickfix?utm_source=github.com&utm_medium=referral&utm_content=townofchapelhill/seeclickfix&utm_campaign=Badge_Grade_Settings)
+
 ## Gather reported events and status from the SeeClickFix portal
 ## Reporting tables for private & internal issues using the SeeClickFix v2 organization API
 
