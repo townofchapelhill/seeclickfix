@@ -17,6 +17,7 @@ SeeClickFix API v2
 
 ### Output 
 seeclickfix_all.csv - raw output from API calls
+
 seeclickfix_clean - sanitized content via pandas
 
 ### Transformations
