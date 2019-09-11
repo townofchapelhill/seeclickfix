@@ -1,0 +1,3 @@
+Describe items to be collected
+Amount paid
+How many items are to be collected?
