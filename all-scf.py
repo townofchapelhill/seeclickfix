@@ -2,6 +2,7 @@ import requests
 import json
 import csv
 import secrets
+import filename_secrets
 import re
 import os
 import pandas
@@ -66,7 +67,8 @@ def write_scf(data):
     global issues
     print(len(issues))
     # open the CSV
-    with open("//CHFS/Shared Documents/OpenData/datasets/prestaging/seeclickfix_all.csv", "w+") as scf_headers:
+    output_filename = os.path.join(filename_secrets.preStaging, "seeclickfix_all.csv")
+    with open(output_filename, "w+") as scf_headers:
 
         # loop through list and remove any fields that start with {
         # prevents processing issue on portal
@@ -80,7 +82,7 @@ def write_scf(data):
                     continue
 
         # writes headers
-        if os.stat('//CHFS/Shared Documents/OpenData/datasets/prestaging/seeclickfix_all.csv').st_size == 0:
+        if os.stat(output_filename).st_size == 0:
             fieldnames = issues[0].keys()
             csv_writer = csv.DictWriter(scf_headers, fieldnames=fieldnames, extrasaction='ignore', delimiter=',')
             csv_writer.writeheader()
@@ -93,9 +95,11 @@ def write_scf(data):
         clean_scf()
 
 def clean_scf():
-    df = pandas.read_csv("//CHFS/Shared Documents/OpenData/datasets/prestaging/seeclickfix_all.csv", error_bad_lines=False, encoding="latin_1")
+    output_filename = os.path.join(filename_secrets.preStaging, "seeclickfix_all.csv")
+    df = pandas.read_csv(output_filename, error_bad_lines=False, encoding="latin_1")
     df.drop(to_drop, axis=1, inplace=True)
-    df.to_csv("//CHFS/Shared Documents/OpenData/datasets/staging/seeclickfix_clean.csv", encoding="utf-8", index=False)
+    cleaned_filename = os.path.join(filename_secrets.productionStaging, "seeclickfix_clean.csv")
+    df.to_csv(cleaned_filename, encoding="utf-8", index=False)
 
 
 # begins the program
