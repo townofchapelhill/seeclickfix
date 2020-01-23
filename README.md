@@ -15,7 +15,7 @@ See Click Fix is a portal to report maintenace requests from citizens to the tow
 Python script all-scf.py accesses the API to pull requests.
 
 ### Data Source
-SeeClickFix API v2
+[SeeClickFix API v2](http://dev.seeclickfix.com/)
 
 ### Output 
 seeclickfix_all.csv - raw output from API calls
