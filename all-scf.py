@@ -18,11 +18,16 @@ def get_issues(csvFile):
     headers = {
     'Authorization': secrets.seeclickkey,
     'Cache-Control': "no-cache",
+    #'If-Modified-Since': "Wed, 01 Jan 2020 00:00:00 GMT"
     }
     
     # while loop to handle the parsing of GET requests
     while True:
+        # retrieval URL
+        url = "https://crm.seeclickfix.com/api/v2/organizations/1102/issues?page=" + str(page_number) + "&per_page=" + str(items_per_page) + "&status=open,acknowledged,closed,archived&details=false"
+
         # request next page
+        print(url)
         response = requests.get(url, headers=headers)
         if response.status_code != 200:
             print(f'API call failed: {response.status_code}')
