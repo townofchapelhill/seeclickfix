@@ -4,7 +4,7 @@ import csv
 import secrets, filename_secrets
 import os
 
-dataset_columns = ['id', 'status', 'summary', 'description', 'rating', 'lat', 'lng', 'address', 'created_at', 'acknowledged_at', 'closed_at', 'reopened_at', 'updated_at', 'url'] 
+dataset_columns = ['id', 'status', 'summary', 'description', 'rating', 'lat', 'lng', 'address', 'created_at', 'acknowledged_at', 'closed_at', 'reopened_at', 'updated_at', 'url']
 
 # function performs the GET requests to obtain the data from seeclickfix v2 API
 def get_issues(csvFile):
@@ -27,7 +27,7 @@ def get_issues(csvFile):
         if response.status_code != 200:
             print(f'API call failed: {response.status_code}')
             raise RuntimeError
-            break
+            # break
         # convert response to JSON
         data = json.loads(response.text)
         if len(data['issues']) == 0:
@@ -54,4 +54,4 @@ if __name__ == '__main__':
           # write the header if the file is empty
           csvFile.writeheader()
     get_issues(csvFile)
-    outputFile.close
+    outputFile.close()
