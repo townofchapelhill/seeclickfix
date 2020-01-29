@@ -8,7 +8,7 @@ dataset_columns = ['id', 'status', 'summary', 'description', 'rating', 'lat', 'l
 
 # function performs the GET requests to obtain the data from seeclickfix v2 API
 def get_issues(csvFile):
-    global dataset_columns
+    global dataset_columns, row_count
     # page number variable to assist with pagination for subsequent GET requests
     page_number = 1
     items_per_page = 50
@@ -44,7 +44,8 @@ def get_issues(csvFile):
             for element in dataset_columns:
                 row_data[element] = dict(i)[element]
             csvFile.writerow(row_data)
-        print(f'Records processed: {page_number*items_per_page}')
+            row_count +=1
+        # print(f'Records processed: {page_number*items_per_page}')
         # increment page number
         page_number += 1
     return
@@ -57,5 +58,7 @@ if __name__ == '__main__':
     if os.stat(output_filename).st_size == 0:
           # write the header if the file is empty
           csvFile.writeheader()
+    row_count = 0
     get_issues(csvFile)
+    print(f'Rows written: {row_count}')
     outputFile.close()
