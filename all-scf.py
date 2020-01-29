@@ -52,7 +52,7 @@ def get_issues(csvFile):
 # Main
 if __name__ == '__main__':
     output_filename = os.path.join(filename_secrets.preStaging, "seeclickfix_all.csv")
-    outputFile = open(output_filename, 'w')
+    outputFile = open(output_filename, 'w', encoding='utf-8')
     csvFile = csv.DictWriter(outputFile, fieldnames=dataset_columns)
     if os.stat(output_filename).st_size == 0:
           # write the header if the file is empty
